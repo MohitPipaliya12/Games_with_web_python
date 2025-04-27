@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Tic Tac Toe</title>
+    <style>
+        body {
+            background-color: #1D3557;
+            color: white;
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+        h1 {
+            margin-bottom: 80px;
+            font-size: 120px; /* Bigger title */
+        }
+        .board {
+            display: grid;
+            grid-template-columns: repeat(3, 250px); /* Even bigger grid */
+            gap: 20px;
+            justify-content: center;
+            align-items: center;
+        }
+        .cell {
+            width: 250px;
+            height: 250px;
+            font-size: 72px; /* Bigger font */
+            background-color: #F1FAEE;
+            color: black;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            border-radius: 15px;
+            transition: background-color 0.3s;
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.4);
+        }
+        .cell:hover {
+            background-color: #A8DADC;
+        }
+        #status {
+            margin-top: 40px;
+            font-size: 36px;
+        }
+        .button-group {
+            margin-top: 40px;
+            display: flex;
+            gap: 30px;
+        }
+        button {
+            padding: 20px 40px;
+            font-size: 50px;
+            border: none;
+            border-radius: 12px;
+            background-color: #E63946;
+            color: white;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        button:hover {
+            background-color: #d62828;
+        }
+    </style>
+</head>
+<body>
+    <h1>Tic Tac Toe</h1>
+    <div class="board" id="board"></div>
+    <h2 id="status"></h2>
+    <div class="button-group">
+        <button onclick="resetGame()">Reset</button>
+        <button onclick="quitGame()">Quit</button>
+    </div>
+
+    <script>
+        const board = document.getElementById('board');
+        const status = document.getElementById('status');
+        let currentPlayer = 'O';
+        let cells = Array(9).fill('');
+
+        function createBoard() {
+            board.innerHTML = '';
+            cells.forEach((cell, index) => {
+                const div = document.createElement('div');
+                div.className = 'cell';
+                div.dataset.index = index;
+                div.addEventListener('click', handleClick);
+                div.textContent = cell;
+                board.appendChild(div);
+            });
+        }
+
+        function handleClick(e) {
+            const index = e.target.dataset.index;
+            if (cells[index] === '') {
+                cells[index] = currentPlayer;
+                currentPlayer = currentPlayer === 'O' ? 'X' : 'O';
+                createBoard();
+                checkWinner();
+            }
+        }
+
+        function checkWinner() {
+            const winPatterns = [
+                [0,1,2],[3,4,5],[6,7,8],
+                [0,3,6],[1,4,7],[2,5,8],
+                [0,4,8],[2,4,6]
+            ];
+            winPatterns.forEach(pattern => {
+                const [a,b,c] = pattern;
+                if (cells[a] && cells[a] === cells[b] && cells[a] === cells[c]) {
+                    status.textContent = `${cells[a]} wins!`;
+                    board.querySelectorAll('.cell').forEach(cell => cell.removeEventListener('click', handleClick));
+                }
+            });
+            if (!cells.includes('') && status.textContent === '') {
+                status.textContent = "It's a draw!";
+            }
+        }
+
+        function resetGame() {
+            cells = Array(9).fill('');
+            currentPlayer = 'O';
+            status.textContent = '';
+            createBoard();
+        }
+
+        function quitGame() {
+            if (confirm("Are you sure you want to quit the game?")) {
+                window.location.href = "/";
+            }
+        }
+
+        createBoard();
+    </script>
+</body>
+</html>

@@ -2,13 +2,9 @@ import pygame
 import time
 import random
 
-# Initialize pygame
 pygame.init()
 
-# Screen dimensions
 width, height = 800, 600
-
-# Colors
 white = (255, 255, 255)
 yellow = (255, 255, 102)
 black = (0, 0, 0)
@@ -17,48 +13,34 @@ green = (0, 255, 0)
 blue = (50, 153, 213)
 gray = (40, 40, 40)
 
-# Initialize screen
 screen = pygame.display.set_mode((width, height))
 pygame.display.set_caption("Snake Game")
-
-# Clock for controlling frame rate
 clock = pygame.time.Clock()
-snake_block = 20  # Snake and grid block size
-snake_speed = 7  # Reduced speed
+snake_block = 20
+snake_speed = 7
 
-# Font styles
 font_style = pygame.font.SysFont("bahnschrift", 25)
 score_font = pygame.font.SysFont("comicsansms", 35)
 
-
 def draw_grid():
-    """Draw a grid on the screen."""
     for x in range(0, width, snake_block):
         for y in range(0, height, snake_block):
             rect = pygame.Rect(x, y, snake_block, snake_block)
             pygame.draw.rect(screen, gray, rect, 1)
 
-
 def score_display(score):
-    """Display the score."""
     value = score_font.render("Your Score: " + str(score), True, yellow)
     screen.blit(value, [0, 0])
 
-
-def snake(snake_block, snake_list):
-    """Draw the snake."""
+def draw_snake(snake_block, snake_list):
     for block in snake_list:
         pygame.draw.rect(screen, green, [block[0], block[1], snake_block, snake_block])
 
-
 def message(msg, color):
-    """Display a message on the screen."""
     message_text = font_style.render(msg, True, color)
     screen.blit(message_text, [width / 6, height / 3])
 
-
 def pause_game():
-    """Pause the game until the user presses 'P' again."""
     paused = True
     message("Game Paused. Press P to Resume", white)
     pygame.display.update()
@@ -71,20 +53,13 @@ def pause_game():
                 pygame.quit()
                 quit()
 
-
 def game_loop():
-    """Main game loop."""
     game_over = False
     game_close = False
-
-    # Initial position
     x1, y1 = width / 2, height / 2
     x1_change, y1_change = 0, 0
-
     snake_list = []
     length_of_snake = 1
-
-    # Food position
     foodx = round(random.randrange(0, width - snake_block) / snake_block) * snake_block
     foody = round(random.randrange(0, height - snake_block) / snake_block) * snake_block
 
@@ -119,41 +94,28 @@ def game_loop():
                 elif event.key == pygame.K_DOWN and y1_change == 0:
                     y1_change = snake_block
                     x1_change = 0
-                elif event.key == pygame.K_p:  # Pause the game when 'P' is pressed
+                elif event.key == pygame.K_p:
                     pause_game()
 
-        # Boundary conditions
         if x1 >= width or x1 < 0 or y1 >= height or y1 < 0:
             game_close = True
 
         x1 += x1_change
         y1 += y1_change
         screen.fill(black)
-
-        # Draw grid
         draw_grid()
-
-        # Draw food
         pygame.draw.rect(screen, red, [foodx, foody, snake_block, snake_block])
-
-        # Update snake
         snake_head = [x1, y1]
         snake_list.append(snake_head)
         if len(snake_list) > length_of_snake:
             del snake_list[0]
-
-        # Check for collision with itself
         for block in snake_list[:-1]:
             if block == snake_head:
                 game_close = True
-
-        # Draw snake and score
-        snake(snake_block, snake_list)
+        draw_snake(snake_block, snake_list)
         score_display(length_of_snake - 1)
-
         pygame.display.update()
 
-        # Check if food is eaten
         if x1 == foodx and y1 == foody:
             foodx = round(random.randrange(0, width - snake_block) / snake_block) * snake_block
             foody = round(random.randrange(0, height - snake_block) / snake_block) * snake_block
@@ -163,7 +125,6 @@ def game_loop():
 
     pygame.quit()
     quit()
-
 
 if __name__ == "__main__":
     game_loop()

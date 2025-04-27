@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Ultimate Tic-Tac-Toe</title>
+    <style>
+        body {
+            background-color: #2E7D32;
+            color: white;
+            font-family: 'Helvetica', sans-serif;
+            margin: 0;
+            padding: 0;
+            text-align: center;
+        }
+        h1 {
+            margin-top: 20px;
+            font-size: 40px;
+        }
+        #message {
+            font-size: 18px;
+            margin: 10px 0;
+            color: #9FFFA6;
+        }
+        #board {
+            display: grid;
+            grid-template-columns: repeat(3, auto);
+            gap: 10px;
+            justify-content: center;
+            margin-top: 20px;
+        }
+        .sub-board {
+            display: grid;
+            grid-template-columns: repeat(3, 50px);
+            grid-template-rows: repeat(3, 50px);
+            gap: 2px;
+            border: 2px solid white;
+            padding: 5px;
+            background-color: #2E7D32;
+        }
+        .cell {
+            background-color: #F0F0F0;
+            width: 50px;
+            height: 50px;
+            font-size: 24px;
+            color: black;
+            font-weight: bold;
+            cursor: pointer;
+        }
+        .cell.disabled {
+            cursor: not-allowed;
+            pointer-events: none;
+        }
+        .highlight {
+            background-color: #007BFF;
+        }
+        .button-group {
+            margin: 20px 0;
+        }
+        button {
+            margin: 5px;
+            padding: 10px 20px;
+            font-size: 16px;
+            background-color: #FF5733;
+            border: none;
+            color: white;
+            cursor: pointer;
+            border-radius: 8px;
+        }
+        button:hover {
+            background-color: #d43f00;
+        }
+        #howToPlayModal {
+            display: none;
+            position: fixed;
+            top: 5%;
+            left: 5%;
+            width: 90%;
+            height: 90%;
+            background-color: #2E7D32;
+            color: white;
+            border: 4px solid white;
+            padding: 20px;
+            overflow-y: auto;
+            z-index: 10;
+        }
+        #howToPlayModal h2 {
+            margin-top: 0;
+        }
+        #closeModal {
+            background: #FF5733;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Ultimate Tic Tac Toe</h1>
+    <h2 id="currentPlayer">O's Turn</h2>
+    <div id="message"></div>
+
+    <div id="board"></div>
+
+    <div class="button-group">
+        <button onclick="restartGame()">Restart</button>
+        <button onclick="showHowToPlay()">How to Play</button>
+    </div>
+
+    <!-- How To Play Modal -->
+    <div id="howToPlayModal">
+        <h2>Rules of Ultimate Tic-Tac-Toe</h2>
+        <p>
+            1. The game consists of a 3x3 grid of 3x3 Tic-Tac-Toe boards.<br><br>
+            2. Players alternate placing their marks ('X' or 'O') in empty cells.<br><br>
+            3. The board you play on is determined by your previous move. 
+            For example, if you place your mark in a cell in the top-left sub-board, 
+            the next player must play in the top-left sub-board.<br><br>
+            4. If a player fills an entire sub-board with their marks (horizontal, vertical, or diagonal), 
+            that sub-board is marked as complete.<br><br>
+            5. The goal is to fill an entire row, column, or diagonal in the main grid with your marks.<br><br>
+            6. The game ends when a player wins or all sub-boards are filled with no winner.
+        </p>
+        <button id="closeModal" onclick="hideHowToPlay()">Close</button>
+    </div>
+
+    <script>
+        let currentPlayer = "O";
+        let mainBoard = Array(3).fill(null).map(() => Array(3).fill(null));
+        let lastMove = null;
+        let centerMarked = false;
+
+        const board = document.getElementById("board");
+        const message = document.getElementById("message");
+        const currentPlayerDisplay = document.getElementById("currentPlayer");
+
+        function createBoard() {
+            board.innerHTML = '';
+            for (let mainX = 0; mainX < 3; mainX++) {
+                for (let mainY = 0; mainY < 3; mainY++) {
+                    const subBoard = document.createElement('div');
+                    subBoard.className = 'sub-board';
+                    subBoard.dataset.mainX = mainX;
+                    subBoard.dataset.mainY = mainY;
+
+                    for (let subX = 0; subX < 3; subX++) {
+                        for (let subY = 0; subY < 3; subY++) {
+                            const cell = document.createElement('button');
+                            cell.className = 'cell';
+                            cell.dataset.x = mainX * 3 + subX;
+                            cell.dataset.y = mainY * 3 + subY;
+                            cell.onclick = () => onClick(cell);
+                            subBoard.appendChild(cell);
+                        }
+                    }
+                    board.appendChild(subBoard);
+                }
+            }
+        }
+
+        function onClick(cell) {
+            const x = parseInt(cell.dataset.x);
+            const y = parseInt(cell.dataset.y);
+
+            const mainX = Math.floor(x / 3);
+            const mainY = Math.floor(y / 3);
+            const subX = x % 3;
+            const subY = y % 3;
+
+            if (lastMove) {
+                const [targetX, targetY] = lastMove;
+                if (mainBoard[targetX][targetY] !== null || centerMarked) {
+                    centerMarked = false;
+                } else if (mainX !== targetX || mainY !== targetY) {
+                    message.textContent = "Invalid Move: Play in the designated sub-board!";
+                    return;
+                }
+            }
+
+            message.textContent = "";
+
+            if (cell.textContent === "") {
+                cell.textContent = currentPlayer;
+                cell.style.color = currentPlayer === "O" ? "blue" : "red";
+
+                if (checkSubWinner(mainX, mainY)) {
+                    mainBoard[mainX][mainY] = currentPlayer;
+                    fillSubBoard(mainX, mainY, currentPlayer);
+                    if (checkWinner()) {
+                        alert(`${currentPlayer} wins the game!`);
+                        restartGame();
+                        return;
+                    }
+                }
+
+                currentPlayer = currentPlayer === "O" ? "X" : "O";
+                currentPlayerDisplay.textContent = `${currentPlayer}'s Turn`;
+                highlightBoard(subX, subY);
+                lastMove = [subX, subY];
+
+                if (mainBoard[subX][subY] !== null) {
+                    centerMarked = true;
+                }
+            }
+        }
+
+        function highlightBoard(mainX, mainY) {
+            document.querySelectorAll(".sub-board").forEach(sub => {
+                sub.classList.remove("highlight");
+            });
+
+            const highlightColor = "highlight";
+            const selector = `.sub-board[data-main-x="${mainX}"][data-main-y="${mainY}"]`;
+            const targetBoard = document.querySelector(selector);
+            if (targetBoard) {
+                targetBoard.classList.add(highlightColor);
+            }
+        }
+
+        function checkSubWinner(mainX, mainY) {
+            let subCells = [];
+            document.querySelectorAll(`.sub-board[data-main-x="${mainX}"][data-main-y="${mainY}"] .cell`).forEach(cell => {
+                subCells.push(cell.textContent);
+            });
+
+            for (let i = 0; i < 3; i++) {
+                if (subCells[i*3] && subCells[i*3] === subCells[i*3+1] && subCells[i*3] === subCells[i*3+2]) return true;
+                if (subCells[i] && subCells[i] === subCells[i+3] && subCells[i] === subCells[i+6]) return true;
+            }
+            if (subCells[0] && subCells[0] === subCells[4] && subCells[0] === subCells[8]) return true;
+            if (subCells[2] && subCells[2] === subCells[4] && subCells[2] === subCells[6]) return true;
+            return false;
+        }
+
+        function checkWinner() {
+            for (let i = 0; i < 3; i++) {
+                if (mainBoard[i][0] && mainBoard[i][0] === mainBoard[i][1] && mainBoard[i][0] === mainBoard[i][2]) return true;
+                if (mainBoard[0][i] && mainBoard[0][i] === mainBoard[1][i] && mainBoard[0][i] === mainBoard[2][i]) return true;
+            }
+            if (mainBoard[0][0] && mainBoard[0][0] === mainBoard[1][1] && mainBoard[0][0] === mainBoard[2][2]) return true;
+            if (mainBoard[0][2] && mainBoard[0][2] === mainBoard[1][1] && mainBoard[0][2] === mainBoard[2][0]) return true;
+            return false;
+        }
+
+        function fillSubBoard(mainX, mainY, player) {
+            const subBoard = document.querySelector(`.sub-board[data-main-x="${mainX}"][data-main-y="${mainY}"]`);
+            subBoard.querySelectorAll('.cell').forEach(cell => {
+                cell.textContent = player;
+                cell.classList.add('disabled');
+                cell.style.backgroundColor = player === "X" ? "#FF5733" : "#007BFF";
+                cell.style.color = "white";
+            });
+            subBoard.style.backgroundColor = player === "X" ? "#FF5733" : "#007BFF";
+        }
+
+        function restartGame() {
+            mainBoard = Array(3).fill(null).map(() => Array(3).fill(null));
+            lastMove = null;
+            centerMarked = false;
+            currentPlayer = "O";
+            currentPlayerDisplay.textContent = "O's Turn";
+            createBoard();
+        }
+
+        function showHowToPlay() {
+            document.getElementById("howToPlayModal").style.display = "block";
+        }
+
+        function hideHowToPlay() {
+            document.getElementById("howToPlayModal").style.display = "none";
+        }
+
+        createBoard();
+    </script>
+</body>
+</html>

@@ -1,0 +1,24 @@
+{
+    "version": "2.0.0",
+    "tasks": [
+      {
+        "label": "build SFML project",
+        "type": "shell",
+        "command": "g++",
+        "args": [
+          "dotGameWithGrafix.cpp",
+          "-o",
+          "dotGameWithGrafix.exe",
+          "-IC:/Users/Mohit/SFML-3.0.0-windows-vc17-64-bit/SFML-3.0.0/include",
+          "-LC:/Users/Mohit/SFML-3.0.0-windows-vc17-64-bit/SFML-3.0.0/lib",
+          "-lsfml-graphics",
+          "-lsfml-window",
+          "-lsfml-system"
+        ],
+        "group": "build",
+        "problemMatcher": [],
+        "detail": "Build SFML Game"
+      }
+    ]
+  }
+  
