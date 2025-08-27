@@ -1,12 +1,15 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Tic Tac Toe</title>
     <style>
+        /* Body Style */
         body {
             background-color: #1D3557;
             color: white;
-            font-family: Arial, sans-serif;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             margin: 0;
             padding: 0;
             display: flex;
@@ -14,63 +17,112 @@
             justify-content: center;
             align-items: center;
             height: 100vh;
+            text-align: center;
+            overflow: hidden;
         }
+
+        /* Title Styling with Neon Effect */
         h1 {
-            margin-bottom: 80px;
-            font-size: 120px; /* Bigger title */
+            color: #E63946;
+            text-shadow: 0 0 15px #E63946, 0 0 30px #E63946;
+            font-weight: bold;
+            animation: neonPulse 1.5s infinite alternate;
+            font-size: 60px;
+            margin-bottom: 30px;
+            margin-top: 0px;
         }
+
+        /* Neon Pulse Animation */
+        @keyframes neonPulse {
+            0% {
+                text-shadow: 0 0 15px #E63946, 0 0 30px #E63946;
+            }
+            100% {
+                text-shadow: 0 0 25px #E63946, 0 0 50px #E63946;
+            }
+        }
+
+        /* Board Styling */
         .board {
             display: grid;
-            grid-template-columns: repeat(3, 250px); /* Even bigger grid */
-            gap: 20px;
+            grid-template-columns: repeat(3, 120px);
+            gap: 10px;
             justify-content: center;
             align-items: center;
+            margin-bottom: 30px;
         }
+
+        /* Cell Styling */
         .cell {
-            width: 250px;
-            height: 250px;
-            font-size: 72px; /* Bigger font */
+            width: 120px;
+            height: 120px;
+            font-size: 48px;
             background-color: #F1FAEE;
-            color: black;
+            color: #333;
             display: flex;
             align-items: center;
             justify-content: center;
             cursor: pointer;
             border-radius: 15px;
-            transition: background-color 0.3s;
+            transition: background-color 0.3s, transform 0.3s;
             box-shadow: 0 6px 12px rgba(0, 0, 0, 0.4);
         }
+
+        /* Cell Hover Effect */
         .cell:hover {
             background-color: #A8DADC;
+            transform: scale(1.05);
         }
+
+        /* Status Text Styling */
         #status {
-            margin-top: 40px;
-            font-size: 36px;
+            font-size: 20px;
+            margin-top: 10px;
+            font-weight: bold;
+            text-shadow: 0 0 10px rgba(0, 255, 255, 0.8);
+            min-height: 40px; /* Ensures the status section is stable */
         }
+
+        /* Button Group Styling */
         .button-group {
-            margin-top: 40px;
+            margin-top: 5px;
             display: flex;
             gap: 30px;
+            justify-content: center;
         }
+
+        /* Button Styling */
         button {
-            padding: 20px 40px;
-            font-size: 50px;
+            padding: 15px 30px;
+            font-size: 14px;
+            font-weight: bold;
             border: none;
             border-radius: 12px;
             background-color: #E63946;
             color: white;
             cursor: pointer;
-            transition: background-color 0.3s;
+            transition: background-color 0.3s, transform 0.3s;
         }
+
+        /* Button Hover Effect */
         button:hover {
             background-color: #d62828;
+            transform: scale(1.05);
         }
     </style>
 </head>
 <body>
+
+    <!-- Title for Tic Tac Toe Game -->
     <h1>Tic Tac Toe</h1>
+
+    <!-- Tic Tac Toe Board -->
     <div class="board" id="board"></div>
+
+    <!-- Game Status -->
     <h2 id="status"></h2>
+
+    <!-- Button Group (Reset and Quit) -->
     <div class="button-group">
         <button onclick="resetGame()">Reset</button>
         <button onclick="quitGame()">Quit</button>
@@ -82,6 +134,7 @@
         let currentPlayer = 'O';
         let cells = Array(9).fill('');
 
+        // Create the Tic Tac Toe board
         function createBoard() {
             board.innerHTML = '';
             cells.forEach((cell, index) => {
@@ -94,6 +147,7 @@
             });
         }
 
+        // Handle each cell click
         function handleClick(e) {
             const index = e.target.dataset.index;
             if (cells[index] === '') {
@@ -104,14 +158,15 @@
             }
         }
 
+        // Check if there is a winner
         function checkWinner() {
             const winPatterns = [
-                [0,1,2],[3,4,5],[6,7,8],
-                [0,3,6],[1,4,7],[2,5,8],
-                [0,4,8],[2,4,6]
+                [0, 1, 2], [3, 4, 5], [6, 7, 8],
+                [0, 3, 6], [1, 4, 7], [2, 5, 8],
+                [0, 4, 8], [2, 4, 6]
             ];
             winPatterns.forEach(pattern => {
-                const [a,b,c] = pattern;
+                const [a, b, c] = pattern;
                 if (cells[a] && cells[a] === cells[b] && cells[a] === cells[c]) {
                     status.textContent = `${cells[a]} wins!`;
                     board.querySelectorAll('.cell').forEach(cell => cell.removeEventListener('click', handleClick));
@@ -122,6 +177,7 @@
             }
         }
 
+        // Reset the game
         function resetGame() {
             cells = Array(9).fill('');
             currentPlayer = 'O';
@@ -129,13 +185,16 @@
             createBoard();
         }
 
+        // Quit the game and go back to the home page
         function quitGame() {
             if (confirm("Are you sure you want to quit the game?")) {
                 window.location.href = "/";
             }
         }
 
+        // Initialize the game board
         createBoard();
     </script>
+
 </body>
 </html>

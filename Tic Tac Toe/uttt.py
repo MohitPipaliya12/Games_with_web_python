@@ -8,7 +8,7 @@ def home():
 
 @app.route("/play")
 def play_game():
-    return render_template("tic_tac_toe.html")  # <-- render web Tic Tac Toe
+    return render_template("Ultimate_Tic_Tac_Toe.html")  # <-- render web Tic Tac Toe
 
 if __name__ == "__main__":
     app.run(debug=True)
