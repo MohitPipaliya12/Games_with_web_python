@@ -20,9 +20,10 @@ def play_ultimate_tic_tac_toe():
 
 @app.route("/play4")
 def play_dot_and_boxes():
-    return render_template("dot_and_boxes.html")
+    return render_template("dot_and_box.html")
 
 if __name__ == "__main__":
-    app.run(debug=True, use_reloader=False)
+    app.run(host="127.0.0.1", port=3000, debug=True, use_reloader=False)
+
 # The use_reloader=False argument is added to prevent the app from running twice in debug mode.
 # This is a common issue with Flask's reloader, which can cause the app to start twice.
