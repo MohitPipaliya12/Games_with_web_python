@@ -3,133 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
     <title>Game Hub</title>
-    <style>
-        /* Overall Page Style */
-        body {
-            margin: 0;
-            padding: 0;
-            min-height: 100vh;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
-            font-family: 'Poppins', sans-serif;
-            color: #fff;
-            overflow: hidden;
-            position: relative;
-        }
 
-        /* Animated Star Background */
-        .stars {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: url('https://cdn.pixabay.com/photo/2015/09/18/18/59/galaxy-944242_960_720.jpg') repeat;
-            animation: moveStars 50s linear infinite;
-            z-index: -1;
-        }
-
-        @keyframes moveStars {
-            0% { transform: translate(0, 0); }
-            100% { transform: translate(1000px, 0); }
-        }
-
-        /* Main Container for Content */
-        .container {
-            background: rgba(255, 255, 255, 0.1);
-            backdrop-filter: blur(10px);
-            border-radius: 20px;
-            padding: 40px 60px;
-            box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
-            text-align: center;
-            max-width: 500px;
-            width: 90%;
-            animation: fadeIn 1.5s ease-in-out;
-        }
-
-        h1 {
-            font-size: 48px;
-            margin-bottom: 40px;
-            font-weight: 700;
-            text-shadow: 0 0 10px rgba(255, 255, 255, 0.3);
-        }
-
-        /* Button Container */
-        .button-container {
-            display: flex;
-            flex-direction: column;
-            gap: 20px;
-        }
-
-        button {
-            padding: 15px 30px;
-            font-size: 20px;
-            font-weight: 600;
-            border: none;
-            border-radius: 12px;
-            background: linear-gradient(135deg, #00ff99, #00ccff);
-            color: #111;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            box-shadow: 0 4px 15px rgba(0, 255, 204, 0.5);
-        }
-
-        button:hover {
-            transform: scale(1.08);
-            background: linear-gradient(135deg, #00ccff, #00ff99);
-            box-shadow: 0 6px 20px rgba(0, 255, 204, 0.7);
-        }
-
-        form {
-            margin: 0;
-        }
-
-        /* Fade-in animation for the container */
-        @keyframes fadeIn {
-            from { opacity: 0; transform: scale(0.95); }
-            to { opacity: 1; transform: scale(1); }
-        }
-
-        /* Footer Style */
-        footer {
-            position: absolute;
-            bottom: 20px;
-            width: 100%;
-            text-align: center;
-            font-size: 14px;
-            color: rgba(255, 255, 255, 0.7);
-            text-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
-        }
-
-        footer a {
-            color: #00ff99;
-            text-decoration: none;
-        }
-
-        /* Responsive Design for Mobile */
-        @media screen and (max-width: 768px) {
-            h1 {
-                font-size: 36px;
-            }
-
-            button {
-                font-size: 18px;
-                padding: 12px 25px;
-            }
-
-            .container {
-                padding: 30px 40px;
-            }
-
-            footer {
-                font-size: 12px;
-            }
-        }
-    </style>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
+
 <body>
 
     <!-- Animated Stars Background -->
@@ -137,28 +16,87 @@
 
     <!-- Main Content -->
     <div class="container">
+
         <h1>🎮 Game Hub 🎮</h1>
 
         <div class="button-container">
+
+            <!-- Available Games -->
+
             <form action="/play1">
-                <button type="submit">Play Snake Game</button>
+                <button type="submit">Snake Game</button>
             </form>
+
             <form action="/play2">
-                <button type="submit">Play Tic Tac Toe Game</button>
+                <button type="submit">Tic Tac Toe</button>
             </form>
+
             <form action="/play3">
-                <button type="submit">Play Ultimate Tic Tac Toe Game</button>
+                <button type="submit">Ultimate Tic Tac Toe</button>
             </form>
+
             <form action="/play4">
-                <button type="submit">Play Dot & Boxes Game</button>
+                <button type="submit">Dot & Boxes</button>
             </form>
+
+
+            <!-- Upcoming Games -->
+
+            <div class="upcoming-title">
+                🚧 Upcoming Games 🚧
+            </div>
+
+            <form action="/play5">
+                <button type="submit" class="upcoming-button">
+                    Chess
+                </button>
+            </form>
+
+            <form action="/play6">
+                <button type="submit" class="upcoming-button">
+                    Connect Four
+                </button>
+            </form>
+
+            <form action="/play7">
+                <button type="submit" class="upcoming-button">
+                    Rock Paper Scissors
+                </button>
+            </form>
+
+            <form action="/play8">
+                <button type="submit" class="upcoming-button">
+                    Memory Game
+                </button>
+            </form>
+
+            <form action="/play9">
+                <button type="submit" class="upcoming-button">
+                    Hangman
+                </button>
+            </form>
+
+            <form action="/play10">
+                <button type="submit" class="upcoming-button">
+                    Minesweeper
+                </button>
+            </form>
+
         </div>
+
     </div>
 
     <!-- Footer -->
     <footer>
-        <p>Made by <a href="https://github.com/MohitPipaliya12" target="_blank">Mohit Pipaliya</a></p>
+        <p>
+            Made by
+            <a href="https://github.com/MohitPipaliya12" target="_blank">
+                Mohit Pipaliya
+            </a>
+        </p>
     </footer>
+
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
 
 </body>
 </html>

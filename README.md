@@ -51,20 +51,38 @@ A collection of games made with Python, Flask, HTML, CSS and JavaScript.
 ## 📁 Project Structure
 
 ```text
-Games/
+Games_with_web&python/
 ├── .vscode/
-├── README.md
-├── Tic Tac Toe/
+├── dot_and_box.py
 ├── games.py
+├── README.md
+├── snake_game.py
 ├── TicTacToe.py
 ├── Tic_Tac_Toe_Grafix.py
-└── uttt.py
-└── templates/
+├── uttt.py
+│   
+├───ltcode
+│    ├── sudoku.cpp
+│    ├── sudoku.exe
+│    └── tempCodeRunnerFile.cpp
+│   
+├───static
+│   ├── games.css
+│   ├── script.js
+│   └── style.css
+│   
+└───templates
+    ├── chess.html
+    ├── connect_four.html
+    ├── dot_and_box.html
+    ├── hangman.html
     ├── index.html
+    ├── memory_game.html
+    ├── minesweeper.html
+    ├── rock_paper_scissors.html
     ├── snake_game.html
     ├── tic_tac_toe.html
     ├── Ultimate_Tic_Tac_Toe.html
-    └── dot_and_box.html
 ```
 
 ## Get Started

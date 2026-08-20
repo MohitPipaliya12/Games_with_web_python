@@ -1,0 +1,483 @@
+/* Overall Page Style */
+body {
+    margin: 0;
+    padding: 0;
+    min-height: 100vh;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    background: linear-gradient(
+        135deg,
+        #0f2027,
+        #203a43,
+        #2c5364
+    );
+
+    font-family: 'Poppins', sans-serif;
+    color: #fff;
+
+    overflow: hidden;
+    position: relative;
+}
+
+
+/* Animated Star Background */
+.stars {
+    position: absolute;
+    top: 0;
+    left: 0;
+
+    width: 100%;
+    height: 100%;
+
+    background: url(
+        'https://cdn.pixabay.com/photo/2015/09/18/18/59/galaxy-944242_960_720.jpg'
+    ) repeat;
+
+    animation: moveStars 50s linear infinite;
+
+    z-index: -1;
+}
+
+@keyframes moveStars {
+    0% {
+        transform: translate(0, 0);
+    }
+
+    100% {
+        transform: translate(1000px, 0);
+    }
+}
+
+
+/* Main Container for Content */
+.container {
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    border-radius: 20px;
+    padding: 12px 45px 22px 45px;
+    box-shadow:
+        0 8px 32px 0 rgba(31, 38, 135, 0.37);
+    text-align: center;
+    max-width: 500px;
+    width: 90%;
+    animation: fadeIn 1.5s ease-in-out;
+    /*
+       Allow scrolling when more games are added
+    */
+    max-height: 80vh;
+    overflow-y: auto;
+}
+
+
+/* Hide Scrollbar */
+.container::-webkit-scrollbar {
+    width: 5px;
+}
+
+.container::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+.container::-webkit-scrollbar-thumb {
+    background: rgba(255, 255, 255, 0.3);
+    border-radius: 10px;
+}
+
+
+/* Heading */
+h1 {
+    font-size: 48px;
+
+    margin-bottom: 40px;
+
+    font-weight: 700;
+
+    text-shadow:
+        0 0 10px rgba(255, 255, 255, 0.3);
+}
+
+
+/* Button Container */
+.button-container {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 12px;
+}
+
+
+/* Buttons */
+button {
+    width: 100%;
+    height: 54px;
+
+    box-sizing: border-box;
+    white-space: normal;
+    overflow-wrap: break-word;
+
+    padding: 15px 30px;
+    font-size: 20px;
+    font-weight: 600;      
+    word-break: normal;        
+    border: none;
+    border-radius: 12px;
+    background: linear-gradient(
+        135deg,
+        #00ff99,
+        #00ccff
+    );
+    color: #111;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow:
+        0 4px 15px rgba(0, 255, 204, 0.5);
+}
+
+
+button:hover {
+    transform: scale(1.08);
+
+    background: linear-gradient(
+        135deg,
+        #00ccff,
+        #00ff99
+    );
+
+    box-shadow:
+        0 6px 20px rgba(0, 255, 204, 0.7);
+}
+
+
+form {
+    margin: 0;
+}
+
+
+/* =================================
+   Upcoming Games
+================================= */
+
+.upcoming-title {
+    grid-column: 1 / -1;
+    margin: 14px 0 8px 0;
+    font-size: 17px;
+    font-weight: 600;
+    color: rgba(255, 255, 255, 0.9);
+    text-shadow:
+        0 0 10px rgba(255, 255, 255, 0.3);
+}
+
+
+/* Upcoming Game Button */
+.upcoming-button {
+    position: relative;
+
+    background: linear-gradient(
+        135deg,
+        #444,
+        #666
+    );
+
+    color: #ddd;
+
+    box-shadow:
+        0 4px 15px rgba(0, 0, 0, 0.4);
+}
+
+
+/* Upcoming Game Hover */
+.upcoming-button:hover {
+    background: linear-gradient(
+        135deg,
+        #555,
+        #777
+    );
+
+    box-shadow:
+        0 6px 20px rgba(255, 255, 255, 0.2);
+}
+
+
+/* Coming Soon Label */
+.upcoming-button span {
+    position: absolute;
+
+    right: 12px;
+
+    top: 50%;
+
+    transform: translateY(-50%);
+
+    padding: 4px 8px;
+
+    border-radius: 20px;
+
+    font-size: 11px;
+
+    font-weight: 500;
+
+    background: rgba(255, 193, 7, 0.2);
+
+    color: #ffd54f;
+
+    border: 1px solid rgba(255, 193, 7, 0.3);
+}
+
+
+/* Fade-in animation for the container */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: scale(0.95);
+    }
+
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+
+/* Footer Style */
+footer {
+    position: absolute;
+
+    bottom: 20px;
+
+    width: 100%;
+
+    text-align: center;
+
+    font-size: 14px;
+
+    color: rgba(255, 255, 255, 0.7);
+
+    text-shadow:
+        0 0 10px rgba(0, 0, 0, 0.5);
+}
+
+
+footer a {
+    color: #00ff99;
+
+    text-decoration: none;
+}
+
+
+footer a:hover {
+    color: #00ccff;
+}
+
+
+/* =================================
+   Mobile Layout
+================================= */
+
+@media screen and (max-width: 768px) {
+
+    html,
+    body {
+        width: 100%;
+        height: 100%;
+        min-height: 100%;
+        margin: 0;
+        padding: 0;
+
+        overflow: hidden;
+    }
+
+    body {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+
+    /* Background */
+    .stars {
+        position: fixed;
+
+        inset: 0;
+
+        width: 100%;
+        height: 100%;
+
+        background-size: cover;
+
+        animation: none;
+    }
+
+
+    /* Main Game Hub */
+    .container {
+        width: calc(100% - 30px);
+        max-width: none;
+
+        margin: 0;
+
+        padding: 20px 15px;
+
+        border-radius: 18px;
+
+        box-sizing: border-box;
+
+        overflow: visible;
+    }
+
+
+    /* Game Hub Heading */
+    h1 {
+        font-size: 30px;
+
+        line-height: 1.1;
+
+        margin: 0 0 16px 0;
+    }
+
+
+    /* Game Buttons */
+    .button-container {
+        display: grid;
+
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+
+        gap: 9px;
+
+        width: 100%;
+    }
+
+
+    form {
+        width: 100%;
+        min-width: 0;
+    }
+
+
+    button {
+        width: 100%;
+        height: 52px;
+
+        min-width: 0;
+
+        padding: 6px 8px;
+
+        box-sizing: border-box;
+
+        font-size: 13px;
+
+        line-height: 1.15;
+
+        white-space: normal;
+
+        overflow-wrap: anywhere;
+
+        word-break: normal;
+    }
+
+
+    /* Upcoming Games Heading */
+    .upcoming-title {
+        grid-column: 1 / -1;
+
+        margin: 8px 0 2px 0;
+
+        padding: 2px 0;
+
+        font-size: 14px;
+
+        line-height: 1.2;
+    }
+
+
+    /* Upcoming Game Buttons */
+    .upcoming-button {
+        position: relative;
+
+        padding: 8px 6px;
+
+        padding-top: 13px;
+    }
+
+
+    /* Coming Soon */
+    .upcoming-button span {
+        position: absolute;
+
+        top: 3px;
+        right: 4px;
+
+        transform: none;
+
+        padding: 1px 4px;
+
+        font-size: 6px;
+
+        line-height: 1;
+
+        white-space: nowrap;
+
+        border-radius: 10px;
+    }
+
+
+    /* Footer */
+    footer {
+        position: fixed;
+
+        bottom: 5px;
+        left: 0;
+
+        width: 100%;
+
+        font-size: 10px;
+    }
+}
+
+
+/* =================================
+   Very Small Phones
+================================= */
+
+@media screen and (max-width: 380px) {
+
+    .container {
+        width: calc(100% - 20px);
+
+        padding: 16px 10px;
+    }
+
+    h1 {
+        font-size: 27px;
+
+        margin-bottom: 12px;
+    }
+
+    .button-container {
+        gap: 7px;
+    }
+
+    button {
+        height: 48px;
+
+        font-size: 12px;
+
+        padding: 5px;
+    }
+
+    .upcoming-title {
+        font-size: 13px;
+    }
+
+    .upcoming-button span {
+        font-size: 5.5px;
+
+        top: 3px;
+        right: 3px;
+    }
+
+    footer {
+        font-size: 9px;
+    }
+}

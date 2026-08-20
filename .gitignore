@@ -1,0 +1,25 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Virtual environment
+venv/
+.venv/
+env/
+
+# VS Code
+.vscode/
+
+# Local files
+*.log
+
+# Temporary files
+tempCodeRunnerFile.*
+
+# Windows
+Thumbs.db
+Desktop.ini
+
+# Ignored project folder
+ltcode/

@@ -1,0 +1,451 @@
+/* =========================================
+   Upcoming Games - Common CSS
+========================================= */
+
+* {
+    box-sizing: border-box;
+}
+
+html,
+body {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    min-height: 100%;
+}
+
+body {
+    min-height: 100vh;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    position: relative;
+
+    overflow: hidden;
+
+    font-family: 'Poppins', sans-serif;
+    color: #fff;
+
+    background: linear-gradient(
+        135deg,
+        #0f2027,
+        #203a43,
+        #2c5364
+    );
+}
+
+
+/* =========================================
+   Animated Background
+========================================= */
+
+.game-stars {
+    position: fixed;
+
+    top: 0;
+    left: 0;
+
+    width: 100%;
+    height: 100%;
+
+    background: url(
+        'https://cdn.pixabay.com/photo/2015/09/18/18/59/galaxy-944242_960_720.jpg'
+    ) center / cover repeat;
+
+    animation: moveStars 50s linear infinite;
+
+    z-index: -2;
+}
+
+.game-stars::after {
+    content: "";
+
+    position: absolute;
+
+    inset: 0;
+
+    background: rgba(5, 15, 25, 0.45);
+
+    z-index: -1;
+}
+
+@keyframes moveStars {
+
+    0% {
+        transform: translate(0, 0);
+    }
+
+    100% {
+        transform: translate(1000px, 0);
+    }
+}
+
+
+/* =========================================
+   Main Game Page Container
+========================================= */
+
+.game-container {
+    width: min(650px, 90vw);
+
+    padding: 45px 50px;
+
+    text-align: center;
+
+    background: rgba(255, 255, 255, 0.10);
+
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+
+    border: 1px solid rgba(255, 255, 255, 0.15);
+
+    border-radius: 24px;
+
+    box-shadow:
+        0 8px 32px rgba(31, 38, 135, 0.37);
+
+    animation: gameFadeIn 0.8s ease-in-out;
+}
+
+
+/* =========================================
+   Game Icon
+========================================= */
+
+.game-page-icon {
+    font-size: 75px;
+
+    line-height: 1;
+
+    margin-bottom: 20px;
+
+    filter:
+        drop-shadow(0 0 10px rgba(255, 255, 255, 0.25));
+
+    animation: iconFloat 3s ease-in-out infinite;
+}
+
+@keyframes iconFloat {
+
+    0%,
+    100% {
+        transform: translateY(0);
+    }
+
+    50% {
+        transform: translateY(-8px);
+    }
+}
+
+
+/* =========================================
+   Game Title
+========================================= */
+
+.game-title {
+    margin: 0 0 12px 0;
+
+    font-size: 48px;
+
+    font-weight: 700;
+
+    text-shadow:
+        0 0 10px rgba(255, 255, 255, 0.3);
+}
+
+
+/* =========================================
+   Coming Soon Text
+========================================= */
+
+.coming-soon {
+    display: inline-block;
+
+    margin: 8px 0 20px 0;
+
+    padding: 7px 16px;
+
+    border-radius: 30px;
+
+    font-size: 14px;
+
+    font-weight: 600;
+
+    color: #ffd54f;
+
+    background: rgba(255, 193, 7, 0.15);
+
+    border: 1px solid rgba(255, 193, 7, 0.3);
+
+    box-shadow:
+        0 0 15px rgba(255, 193, 7, 0.08);
+}
+
+
+/* =========================================
+   Description
+========================================= */
+
+.game-description {
+    margin: 0 auto 30px auto;
+
+    max-width: 500px;
+
+    font-size: 17px;
+
+    line-height: 1.6;
+
+    color: rgba(255, 255, 255, 0.75);
+}
+
+
+/* =========================================
+   Back Button
+========================================= */
+
+.back-button {
+    display: inline-flex;
+
+    align-items: center;
+    justify-content: center;
+
+    min-width: 190px;
+
+    height: 50px;
+
+    padding: 0 25px;
+
+    border-radius: 12px;
+
+    text-decoration: none;
+
+    font-size: 17px;
+
+    font-weight: 600;
+
+    color: #111;
+
+    background: linear-gradient(
+        135deg,
+        #00ff99,
+        #00ccff
+    );
+
+    box-shadow:
+        0 4px 15px rgba(0, 255, 204, 0.5);
+
+    transition: all 0.3s ease;
+}
+
+.back-button:hover {
+    transform: scale(1.06);
+
+    background: linear-gradient(
+        135deg,
+        #00ccff,
+        #00ff99
+    );
+
+    box-shadow:
+        0 6px 20px rgba(0, 255, 204, 0.7);
+}
+
+
+/* =========================================
+   Footer
+========================================= */
+
+.game-footer {
+    position: fixed;
+
+    bottom: 15px;
+
+    left: 0;
+
+    width: 100%;
+
+    text-align: center;
+
+    font-size: 13px;
+
+    color: rgba(255, 255, 255, 0.65);
+
+    text-shadow:
+        0 0 10px rgba(0, 0, 0, 0.5);
+}
+
+.game-footer a {
+    color: #00ff99;
+
+    text-decoration: none;
+
+    transition: color 0.3s ease;
+}
+
+.game-footer a:hover {
+    color: #00ccff;
+}
+
+
+/* =========================================
+   Animation
+========================================= */
+
+@keyframes gameFadeIn {
+
+    from {
+        opacity: 0;
+        transform: scale(0.95);
+    }
+
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+
+/* =========================================
+   Tablet
+========================================= */
+
+@media screen and (max-width: 768px) {
+
+    .game-container {
+        width: calc(100% - 30px);
+
+        padding: 35px 25px;
+
+        border-radius: 20px;
+    }
+
+    .game-page-icon {
+        font-size: 60px;
+
+        margin-bottom: 15px;
+    }
+
+    .game-title {
+        font-size: 38px;
+    }
+
+    .game-description {
+        font-size: 15px;
+
+        margin-bottom: 25px;
+    }
+
+    .back-button {
+        min-width: 170px;
+
+        height: 46px;
+
+        font-size: 15px;
+    }
+}
+
+
+/* =========================================
+   Mobile
+========================================= */
+
+@media screen and (max-width: 500px) {
+
+    body {
+        overflow: hidden;
+    }
+
+    .game-container {
+        width: calc(100% - 24px);
+
+        padding: 28px 18px;
+
+        border-radius: 18px;
+    }
+
+    .game-page-icon {
+        font-size: 52px;
+
+        margin-bottom: 12px;
+    }
+
+    .game-title {
+        font-size: 30px;
+
+        line-height: 1.15;
+
+        margin-bottom: 8px;
+    }
+
+    .coming-soon {
+        margin: 5px 0 15px 0;
+
+        padding: 5px 12px;
+
+        font-size: 11px;
+    }
+
+    .game-description {
+        font-size: 13px;
+
+        line-height: 1.5;
+
+        margin-bottom: 20px;
+    }
+
+    .back-button {
+        width: 100%;
+
+        min-width: 0;
+
+        height: 44px;
+
+        font-size: 14px;
+    }
+
+    .game-footer {
+        bottom: 5px;
+
+        font-size: 10px;
+    }
+}
+
+
+/* =========================================
+   Very Small Mobile
+========================================= */
+
+@media screen and (max-width: 380px) {
+
+    .game-container {
+        width: calc(100% - 18px);
+
+        padding: 22px 14px;
+    }
+
+    .game-page-icon {
+        font-size: 45px;
+    }
+
+    .game-title {
+        font-size: 27px;
+    }
+
+    .coming-soon {
+        font-size: 10px;
+
+        padding: 4px 10px;
+    }
+
+    .game-description {
+        font-size: 12px;
+    }
+
+    .back-button {
+        height: 42px;
+
+        font-size: 13px;
+    }
+}
