@@ -1,6 +1,74 @@
-# 🎮 Python Games Collection
+# 🎮 Games Collection Web & Python
 
-A collection of games made with Python, Flask, HTML, CSS and JavaScript.
+A collection of classic and fun games built using **Python, Flask, HTML, CSS, and JavaScript**.
+
+The project provides a web-based Game Hub where users can select and play different games directly from their browser.
+
+## 🌐 Live Website
+
+🎮 **Play the games online:**  
+https://games-with-web-python.onrender.com/
+
+## 🎯 Games Included
+
+| # | Game |
+|---|---|
+| 1 | 🐍 Snake Game |
+| 2 | ❌ Tic Tac Toe |
+| 3 | 🎮 Ultimate Tic Tac Toe |
+| 4 | 🔵 Dot and Box |
+| 5 | ♟️ Chess |
+| 6 | 🔴 Connect Four |
+| 7 | ✊ Rock Paper Scissors |
+| 8 | 🧠 Memory Game |
+| 9 | 🎯 Hangman |
+| 10 | 💣 Minesweeper |
+
+## 🛠️ Technologies Used
+
+- **Python**
+- **Flask**
+- **HTML5**
+- **CSS3**
+- **JavaScript**
+- **Gunicorn**
+- **Render**
+- **Git & GitHub**
+
+## 📁 Project Structure
+
+```text
+Games_with_web_python/
+│
+├── .gitignore
+├── README.md
+├── requirements.txt
+│
+├── games.py
+├── dot_and_box.py
+├── snake_game.py
+├── TicTacToe.py
+├── Tic_Tac_Toe_Grafix.py
+├── uttt.py
+│
+├── static/
+│   ├── games.css
+│   ├── script.js
+│   └── style.css
+│
+└── templates/
+    ├── chess.html
+    ├── connect_four.html
+    ├── dot_and_box.html
+    ├── hangman.html
+    ├── index.html
+    ├── memory_game.html
+    ├── minesweeper.html
+    ├── rock_paper_scissors.html
+    ├── snake_game.html
+    ├── tic_tac_toe.html
+    └── Ultimate_Tic_Tac_Toe.html
+```
 
 ## 🎮 Game Features
 
@@ -39,126 +107,107 @@ A collection of games made with Python, Flask, HTML, CSS and JavaScript.
 * 🔗 **Access & Navigation** — Home page navigation, local PC hosting, and remote access through a tunnel such as Cloudflare Tunnel.
 
 
-## 🛠️ Technologies
 
-- Python
-- Flask
-- HTML5
-- CSS3
-- JavaScript
-- Canvas API
-
-## 📁 Project Structure
-
-```text
-Games_with_web&python/
-├── .vscode/
-├── dot_and_box.py
-├── games.py
-├── README.md
-├── snake_game.py
-├── TicTacToe.py
-├── Tic_Tac_Toe_Grafix.py
-├── uttt.py
-│   
-├───ltcode
-│    ├── sudoku.cpp
-│    ├── sudoku.exe
-│    └── tempCodeRunnerFile.cpp
-│   
-├───static
-│   ├── games.css
-│   ├── script.js
-│   └── style.css
-│   
-└───templates
-    ├── chess.html
-    ├── connect_four.html
-    ├── dot_and_box.html
-    ├── hangman.html
-    ├── index.html
-    ├── memory_game.html
-    ├── minesweeper.html
-    ├── rock_paper_scissors.html
-    ├── snake_game.html
-    ├── tic_tac_toe.html
-    ├── Ultimate_Tic_Tac_Toe.html
-```
 
 ## Get Started
 
-### 1. check python
+### 1. Clone the repository
 
 ```bash
-python --version
-```
-OR
-```bash
-py --version
+git clone https://github.com/MohitPipaliya12/Games_with_web_python.git
 ```
 
-### 2. Install Flask
+### 2. Create a virtual environment
 
 ```bash
-pip install flask
-```
-OR
-```bash
-py -m pip install flask
+python -m venv venv
 ```
 
-### 3. Run the Flask Game
+### 3. Install dependencies
 
-Open Command Prompt in the project folder.
 ```bash
-cd .\...\Games
+pip install -r requirements.txt
 ```
-Run
-```bash
-python game.py
-```
-OR
-```bash
-py game.py
-```
--Running on http://127.0.0.1:3000/
 
-Run in mobile Device without Wi-Fi
-```bash
-cloudflared.exe tunnel --url http://localhost:3000
-```
-Cloudflare will give you a URL similar to:
-```bash
-https://powerpoint-army-phone-den.trycloudflare.com 
-```
-- Open that URL on your phone using mobile data.
-- Your PC must have an internet connection for the tunnel to work.
+### 4. Run the Flask application
 
-## 🎮 Game URLs
-Home
 ```bash
-http://127.0.0.1:3000/
+python games.py
 ```
-Snake
+The application will normally be available at:
 ```bash
-http://127.0.0.1:3000/play1
+http://127.0.0.1:3000
 ```
-Tic Tac Toe
+Open the URL in your browser and start playing.
+
+## ☁️ Deployment
+
+This project is deployed using:
+
+- **GitHub** — Source code hosting
+- **Render** — Web application hosting
+- **Gunicorn** — Production WSGI server
+
+### Render Configuration
+
+**Build Command:**
+
 ```bash
-http://127.0.0.1:3000/play2
+pip install -r requirements.txt
 ```
-Ultimate Tic Tac Toe
+
+**Start Command::**
+
 ```bash
-http://127.0.0.1:3000/play3
+gunicorn games:app
 ```
-Dot and Boxes
-```bash
-http://127.0.0.1:3000/play4
-```
+
+🌐 **Live Website**
+https://games-with-web-python.onrender.com/
+
+## 🎮 How to Play
+
+1. Open the **Game Hub**.
+2. Select any game from the available games.
+3. Play the selected game directly in your browser.
+4. Use the **Back to Game Hub** button to return to the main page.
+5. Select another game and continue playing.
+
+No additional software is required to play the web-based games.
+
+
+## 📌 Notes
+
+- This project is created as a learning and game-development project.
+- The web interface is built using **Flask, HTML, CSS, and JavaScript**.
+- Python is used for the Flask backend and game logic.
+- Static files such as CSS and JavaScript are stored in the `static/` directory.
+- HTML templates are stored in the `templates/` directory.
+- The `ltcode/` directory is intentionally excluded from the GitHub repository.
+- The project is hosted on **Render**.
+- The application may take a short time to respond if the Render service has been inactive.
+
 
 ## 👨‍💻 Author
-Mohit Pipaliya
-GitHub: https://github.com/MohitPipaliya12
+
+**Mohit**
+
+Computer Science Engineering Student
+
+GitHub:  
+https://github.com/MohitPipaliya12/
+
+
+## ⭐ Support
+
+If you like this project:
+
+- ⭐ Give the repository a **Star** on GitHub.
+- 🎮 Play the games and share the project with others.
+- 🐛 Report bugs or issues through **GitHub Issues**.
+- 💡 Suggest new games and improvements.
+
+Your feedback and support are appreciated!
 
 ## 📜 License
 This project is for learning and personal use.
