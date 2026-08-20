@@ -23,34 +23,31 @@ def play_dot_and_boxes():
     return render_template("dot_and_box.html")
 
 # Upcoming games
-@app.route("/play5")
-def play_chess():
+@app.route("/chess")
+def chess():
     return render_template("chess.html")
 
-
-@app.route("/play6")
-def play_connect_four():
+@app.route("/connect-four")
+def connect_four():
     return render_template("connect_four.html")
 
+@app.route("/hangman")
+def hangman():
+    return render_template("hangman.html")
 
-@app.route("/play7")
-def play_rock_paper_scissors():
-    return render_template("rock_paper_scissors.html")
-
-
-@app.route("/play8")
-def play_memory_game():
+@app.route("/memory-game")
+def memory_game():
     return render_template("memory_game.html")
 
 
-@app.route("/play9")
-def play_hangman():
-    return render_template("hangman.html")
-
-
-@app.route("/play10")
-def play_minesweeper():
+@app.route("/minesweeper")
+def minesweeper():
     return render_template("minesweeper.html")
+
+
+@app.route("/rock-paper-scissors")
+def rock_paper_scissors():
+    return render_template("rock_paper_scissors.html")
 
 if __name__ == "__main__":
     app.run(
